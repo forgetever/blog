@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>{$site_seo_title} {$site_name}</title>
+    <meta name="keywords" content="{$site_seo_keywords}" />
+    <meta name="description" content="{$site_seo_description}">
+    <tc_include file="Public:head" />
+</head>
+
+<body class="body-white">
+    <tc_include file="Public:nav" />
+		<!--pic show sta-->
+		<div class="feature-cover-container" style="width: 245px; opacity: 1;display: block;">
+			<div class="feature-cover-box">
+				<h3>新年寄语</h3>
+				<p class="feature-cover-content">潜心磨剑，藏器于身。</p>
+			</div>
+			<div class="feature-cover-bg" style="width: 100%; height: 100%; background-image: url(__TMPL__Public/img/feature-cover-leaf.jpg);">
+
+			</div>
+		</div>
+		<!--pic show end-->
+
+		<!--更新or分类+footer-->
+		<div class="container-fluid main-container" id="main-container">
+			<!--main con sta-->
+			<div class="row">
+				<div class="col-md-12">
+					<h2 class="page-title">友情链接</h2>
+				</div>
+			</div>
+			<div class="post-content">
+				<div class="row">
+					<div class="col-md-12">
+						<div class="thumbnail">
+							<a href="javascript:;"><img src="__TMPL__Public/img/links.jpg"></a>
+							<div class="caption">
+								<h3>关于链接</h3>
+								<p>这个年代坚持写blog的人似乎真的是愈发少了，不知道我们会不会是最后一批部落格主，:D</p>
+								<p><span class="label label-info">EXEC: SORT LINK ORDER BY DATE ASC</span></p>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="list-group" id="site-link-list">
+					<a class="list-group-item" target="_blank" href="#">
+						<h4 class="list-group-item-heading">
+							<i class="fa fa-link"></i>鬼鬼
+						</h4>
+						<p class="list-group-item-text">颜彦姐姐的博客</p>
+					</a>
+					<a class="list-group-item" target="_blank" href="#">
+						<h4 class="list-group-item-heading">
+							<i class="fa fa-link"></i>鬼鬼
+						</h4>
+						<p class="list-group-item-text">颜彦姐姐的博客</p>
+					</a><a class="list-group-item" target="_blank" href="#">
+						<h4 class="list-group-item-heading">
+							<i class="fa fa-link"></i>鬼鬼
+						</h4>
+						<p class="list-group-item-text">颜彦姐姐的博客</p>
+					</a><a class="list-group-item" target="_blank" href="#">
+						<h4 class="list-group-item-heading">
+							<i class="fa fa-link"></i>鬼鬼
+						</h4>
+						<p class="list-group-item-text">颜彦姐姐的博客</p>
+					</a>
+				</div>
+			</div>
+			<tc_include file="Public:footer" />
+    </div>
+    <tc_include file="Public:scripts" /> {:hook('footer_end')}
+</body>
+
+</html>
