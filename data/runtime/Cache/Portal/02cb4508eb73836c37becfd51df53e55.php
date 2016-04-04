@@ -6,7 +6,7 @@
     <meta name="keywords" content="<?php echo ($site_seo_keywords); ?>" />
     <meta name="description" content="<?php echo ($site_seo_description); ?>">
     	<?php  function _sp_helloworld(){ echo "hello ThinkCMF!"; } function _sp_helloworld2(){ echo "hello ThinkCMF2!"; } function _sp_helloworld3(){ echo "hello ThinkCMF3!"; } ?>
-	<?php $portal_index_lastnews="9,10,11,12,13,14,15,16,17,18"; $portal_hot_articles="9,10,11,12,13,14,15,16,17,18"; $portal_last_post="1,2"; $tmpl=sp_get_theme_path(); ?>
+	<?php $portal_index_lastnews="11,13"; $portal_hot_articles="1,2"; $portal_last_post="1,2"; $tmpl=sp_get_theme_path(); ?>
 	<meta name="author" content="zp">
 	<meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -109,136 +109,41 @@
         	描述：nav end
         -->
 
-    <!--pic show sta-->
-    <div class="feature-cover-container" style="width: 245px; opacity: 1;display: block;">
-        <div class="feature-cover-box">
-            <h3>新年寄语</h3>
-            <p class="feature-cover-content">潜心磨剑，藏器于身。</p>
-        </div>
-        <div class="feature-cover-bg" style="width: 100%; height: 100%; background-image: url(/blog/themes/myblog/Public/img/feature-cover-leaf.jpg);">
-        </div>
-    </div>
-    <!--pic show end-->
-    <!--main con sta-->
-    <!-- 推荐 -->
-    <div class="container-fluid main-container" id="main-container">
-        <div class="row">
-            <!--search bar sta-->
-            <div class="col-md-12">
-                <h2 class="page-title">
-						<div class="row">
-							<div class="col-md-6 col-xs-6">
-								推荐阅读
-							</div>
-							<div class="col-md-6 col-xs-6">
-								<div class="input-group page-search-box clearfix">
-									<input type="text" class="form-control pull-right" placeholder="搜索站内">
-									<span class="input-group-btn">
-										<a class="btn btn-default search-button" href="javascript:;">搜索</a>
-									</span>
-								</div>
-							</div>
-						</div>
-					</h2>
-            </div>
-            <!--search bar end-->
-            <!--推荐文章-->
-            <?php $hot_articles=sp_sql_posts("cid:$portal_hot_articles;field:post_title,post_excerpt,tid,term_id,smeta;
-					order:post_hits desc;limit:1;"); ?>
-			<?php if(is_array($hot_articles)): foreach($hot_articles as $key=>$vo): $smeta=json_decode($vo['smeta'],true); ?>
-            <div class="col-md-12" style="opacity: 1; display: block;">
-                <div class="">
-                    <h3 class="post-title">
-							<a href="<?php echo leuu('article/index',array('id'=>$vo['tid']));?>"><?php echo ($vo["post_title"]); ?></a>
-						</h3>
-                    <div class="">
-                    	<?php if(!empty($smeta['thumb'])): ?><img  src="<?php echo sp_get_asset_upload_path($smeta['thumb']);?>" class="img-responsive" alt="">
-		                <?php else: ?>
-							<img  src="/blog/themes/myblog/Public/img/feeling-quickly.png" class="img-responsive" alt=""><?php endif; ?>
-                    </div>
-                    <p>
-                        <?php echo ($vo["post_excerpt"]); ?>
-                        <a class="btn btn-primary btn-xs" href="<?php echo leuu('article/index',array('id'=>$vo['tid']));?>">浏览全文</a>
-                    </p>
-                </div>
-            </div><?php endforeach; endif; ?>
-            <!--推荐文章-->
-        </div>
-    </div>
-    <!--推荐 end-->
-    <!--更新or分类+footer-->
-    <div class="container-fluid main-container" id="main-container">
-        <div class="row">
-            <div class="col-md-12">
-                <h2 class="page-title">最近更新</h2>
-            </div>
-        </div>
-        <!--更新文章-->
-        <?php $lastnews=sp_sql_posts("cid:$portal_index_lastnews;
-				field:post_title,post_date,post_keywords,post_excerpt,tid,term_id,smeta;
-				order:post_date desc;limit:6;"); ?>
-		<?php if(is_array($lastnews)): foreach($lastnews as $key=>$vo): $term=sp_get_term($vo['term_id'] ); ?>
-        <div class="row">
-            <div class="col-md-12 post-container">
-                <h2 class="post-title">
-						<a href="<?php echo leuu('article/index',array('id'=>$vo['tid']));?>" rel="bookmark"><?php echo ($vo["post_title"]); ?></a>
-					</h2>
-                <div class="meta-box">
-                    <span class="m-post-date">
-							<i class="fa fa-calendar-o"></i> <?php echo date("Y年m月d",strtotime($vo['post_date']));?>
+		<!--content-->
+		<div class="container-fluid mcontainer" >
+			<!--main con sta-->
+			<div class="row">
+				<div class="col-md-12 post-container">
+					<h2 class="post-title"><?php echo ($post_title); ?></h2>
+					<div class="meta-box">
+						<span class="m-post-date">
+							<i class="fa fa-calendar-o"></i> <?php echo date("Y - m - d",strtotime($post_date));?>
 						</span>
-                    <span class="comments-link">
-							<a href="#" class="ds-thread-count" target="_self">
-								<i class="fa fa-comments-o"></i> 留言</a>
+						<span class="comments-link">
+							<a href="#" class="ds-thread-count" target="_self">暂无评论</a>
 						</span>
-                </div>
-                <div class="post-content post-expect">
-                    <p><?php echo ($vo["post_excerpt"]); ?>
-                        <a href="<?php echo leuu('article/index',array('id'=>$vo['tid']));?>" class="btn btn-primary btn-xs" style="text-indent: 0;">阅读全文</a>
-                    </p>
-                </div>
-                <div class="meta-box">
-                    <span class="cat-links">
-							<i class="fa fa-navicon"></i>
-							<b>分类:</b>
-							<a href="<?php echo leuu('list/index',array('id'=>$vo['term_id']));?>" rel="category tag" target="_self"><?php echo ($term["name"]); ?></a>
-					</span>
-                    <span class="tag-links">
+					</div>
+					<div class="post-content">
+						<?php echo ($post_content); ?>	
+					</div>
+					<div class="meta-box">
+						<?php $term=sp_get_term($term_id ); ?>
+						<span class="cat-links">
+							<i class="fa fa-navicon"></i><b>分类:</b>
+							<a href="<?php echo leuu('list/index',array('id'=>$term_id));?>" target="_self"><?php echo ($term["name"]); ?></a>, 
+						</span>
+						<span class="tag-links">
 							<i class="fa fa-tags"></i><b>标签:</b>
-							<a href="#" rel="tag" target="_self"><?php echo ($vo["post_keywords"]); ?></a>
-					</span>
-                </div>
-            </div>
-        </div><?php endforeach; endif; ?>
-        <!--more con sta-->
-        <div class="row">
-            <div class="col-md-12">
-                <h2 class="page-title">更多内容</h2></div>
-        </div>
-        <!--more con end-->
-        <div class="row">
-            <div class="col-md-12 post-container">
-                <div class="row">
-                    <div class="col-md-4">
-                        <a class="btn btn-primary home-browser-more-btn" href="#">浏览博客更多文章</a>
-                    </div>
-                    <div class="col-md-8"></div>
-                </div>
-                <div class="hr_25"></div>
-                <div class="row">
-                    <div class="col-md-4">
-                        <a href="/blog/index.php?m=list&a=index&id=3" class="thumbnail"><img src="/blog/themes/myblog/Public/img/works.png" alt="生活点滴"></a>
-                    </div>
-                    <div class="col-md-4">
-                        <a href="/blog/index.php?m=list&a=index&id=4" class="thumbnail"><img src="/blog/themes/myblog/Public/img/study.png" alt="学习点滴"></a>
-                    </div>
-                    <div class="col-md-4">
-                        <a href="/blog/index.php?m=list&a=index&id=18" class="thumbnail"><img src="/blog/themes/myblog/Public/img/books.png" alt="书籍推荐"></a>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <br>
+							<a href="#" rel="tag" target="_self">dash</a>, 
+							<a href="#" rel="tag" target="_self">更新文档</a>
+						</span>
+					</div>
+					<div class="hr_25">
+						
+					</div>
+				</div>
+			</div>
+			<br>
 <br>
 <br>
 <!-- Footer ================================================== -->

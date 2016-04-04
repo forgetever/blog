@@ -28,12 +28,12 @@
     <?php
 			$effected_id="JS_nav_list";
 		  	$filetpl="<a href='\$href' target='\$target'>\$label</a>";
-		  	$foldertpl="<a href='\$href' target='\$target' class='dropdown-toggle' data-toggle='dropdown'>\$label </a>";
+		  	$foldertpl="<a href='\$href' target='\$target' >\$label </a>";
 		  	$ul_class="dropdown-menu bounceOutDown" ;
-		  	$li_class="menu-item" ;
+		  	$li_class="" ;
 		  	$style="nav navbar-nav navbar-right navbar-inverse";
 		  	$showlevel=6;
-		  	$dropdown='dropdown';
+		  	$dropdown='menu-item';
 		  	echo sp_get_menu("main",$effected_id,$filetpl,$foldertpl,$ul_class,$li_class,$style,$showlevel,$dropdown);
 		?>
        <!--  <ul class="nav navbar-nav navbar-right navbar-inverse" id="JS_nav_list">

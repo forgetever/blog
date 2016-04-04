@@ -20,90 +20,30 @@
 							<h1>关于系统</h1>
 						</div>
 						<ul class="timeline animated">
-							<li class="active">
-								<div class="timeline-time">
-									<strong>2016年03月17日</strong>
-								</div>
-								<div class="timeline-icon">
-									<div class="bg-success">
-										<i class="fa fa-clock-o"></i>
+							<php>
+							    $result = sp_sql_posts_paged("cid:$cat_id;order:post_date DESC;");
+							</php>
+							<volist name="result['posts']" id="vo">
+							<php>
+								$smeta=json_decode($vo['smeta'], true);
+								$term=sp_get_term($vo['term_id'] );
+							</php>
+								<li >
+									<div class="timeline-time">
+										<strong>{:date("Y年m月d",strtotime($vo['post_date']))}</strong>
 									</div>
-								</div>
-								<div class="timeline-content">
-									<h2>增加系列教程模块</h2>
-									<p>增加系列教程模块，将同一类的文章综合在一起，包含目录结构，很清楚的找到想看的文章，类似于WIKI。</p>
-								</div>
-							</li>
-							<li class="active">
-								<div class="timeline-time">
-									<strong>2016年03月01日</strong>
-								</div>
-								<div class="timeline-icon">
-									<div class="bg-success">
-										<i class="fa fa-clock-o"></i>
+									<div class="timeline-icon">
+										<div class="bg-success">
+											<i class="fa fa-clock-o"></i>
+										</div>
 									</div>
-								</div>
-								<div class="timeline-content">
-									<h2>标签云增加关联文章数</h2>
-									<p>标签云增加关联的文章数显示</p>
-								</div>
-							</li>
-							<li class="active">
-								<div class="timeline-time">
-									<strong>2016年02月29日</strong>
-								</div>
-								<div class="timeline-icon">
-									<div class="bg-success">
-										<i class="fa fa-clock-o"></i>
+									<div class="timeline-content">
+										<h2>{$vo.post_title}</h2>
+										<p>{$vo.post_content}</p>
 									</div>
-								</div>
-								<div class="timeline-content">
-									<h2>增加浏览量Top展示</h2>
-									<p>增加文章浏览量Top展示</p>
-								</div>
-							</li>
-							<li class="active">
-								<div class="timeline-time">
-									<strong>2016年02月18日</strong>
-								</div>
-								<div class="timeline-icon">
-									<div class="bg-success">
-										<i class="fa fa-clock-o"></i>
-									</div>
-								</div>
-								<div class="timeline-content">
-									<h2>站内搜索</h2>
-									<p>新增站内搜索功能</p>
-								</div>
-							</li>
-							<li class="active">
-								<div class="timeline-time">
-									<strong>2016年02月02日</strong>
-								</div>
-								<div class="timeline-icon">
-									<div class="bg-success">
-										<i class="fa fa-clock-o"></i>
-									</div>
-								</div>
-								<div class="timeline-content">
-									<h2>系统优化</h2>
-									<p>系统第一次大的优化，加快文章详情、标签、Top5文章的加载速度，添加社会化评论框架。之后也会持续的优化以及添加更多新的功能。</p>
-								</div>
-							</li>
-							<li class="active">
-								<div class="timeline-time">
-									<strong>2016年01月29日</strong>
-								</div>
-								<div class="timeline-icon">
-									<div class="bg-success">
-										<i class="fa fa-clock-o"></i>
-									</div>
-								</div>
-								<div class="timeline-content">
-									<h2>上线啦</h2>
-									<p>上线啦！欢迎大家多多捧场~~~</p>
-								</div>
-							</li>
+								</li>
+							</volist>
+							
 						</ul>
 					</main>
 				</div>
@@ -112,6 +52,7 @@
 			<tc_include file="Public:footer" />
     </div>
     <tc_include file="Public:scripts" /> {:hook('footer_end')}
+    <script src="__TMPL__Public/js/timeline.js" type="text/javascript" charset="utf-8"></script>
 </body>
 
 </html>

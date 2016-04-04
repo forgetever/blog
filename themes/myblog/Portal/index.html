@@ -44,20 +44,32 @@
             </div>
             <!--search bar end-->
             <!--推荐文章-->
+            <php>
+				$hot_articles=sp_sql_posts("cid:$portal_hot_articles;field:post_title,post_excerpt,tid,term_id,smeta;
+					order:post_hits desc;limit:1;"); 
+					
+			</php>
+			<foreach name="hot_articles" item="vo">
+				<php>$smeta=json_decode($vo['smeta'],true);</php>
             <div class="col-md-12" style="opacity: 1; display: block;">
                 <div class="">
                     <h3 class="post-title">
-							<a href="#">天下武功，唯快不破</a>
+							<a href="{:leuu('article/index',array('id'=>$vo['tid']))}">{$vo.post_title}</a>
 						</h3>
                     <div class="">
-                        <img class="" alt="天下武功，唯快不破" src="__TMPL__Public/img/feeling-quickly.png" style="display: inline;">
+                    	<if condition="!empty($smeta['thumb'])">
+		                    <img  src="{:sp_get_asset_upload_path($smeta['thumb'])}" class="img-responsive" alt="">
+		                <else/>
+							<img  src="__TMPL__Public/img/feeling-quickly.png" class="img-responsive" alt="">
+		                </if>
                     </div>
                     <p>
-                        不知道从什么时候开始，不管是写独立博客，还是网络应用， 甚至写托管博客的人都会朝着“大”网站看齐，去追求网站的响应速度，通俗点说，就是白屏时间 ，因为据各种报告说，网站打开速度更快一些，带来的用户体验就更好一些， 从而带来更多的附加利益。但是对于用户来说，快，并不是简简单单请求数目尽可能少， 和服务器吞吐能力尽可能大。那么，怎么快？
-                        <a class="btn btn-primary btn-xs" href="#">浏览全文</a>
+                        {$vo.post_excerpt}
+                        <a class="btn btn-primary btn-xs" href="{:leuu('article/index',array('id'=>$vo['tid']))}">浏览全文</a>
                     </p>
                 </div>
             </div>
+            </foreach>
             <!--推荐文章-->
         </div>
     </div>
@@ -70,14 +82,22 @@
             </div>
         </div>
         <!--更新文章-->
+        <php>
+			$lastnews=sp_sql_posts("cid:$portal_index_lastnews;
+				field:post_title,post_date,post_keywords,post_excerpt,tid,term_id,smeta;
+				order:post_date desc;limit:6;"); 
+			
+		</php>
+		<foreach name="lastnews" item="vo">
+			<php>$term=sp_get_term($vo['term_id'] );</php>
         <div class="row">
             <div class="col-md-12 post-container">
                 <h2 class="post-title">
-						<a href="#" rel="bookmark">个人博客技术演进的流水账</a>
+						<a href="{:leuu('article/index',array('id'=>$vo['tid']))}" rel="bookmark">{$vo.post_title}</a>
 					</h2>
                 <div class="meta-box">
                     <span class="m-post-date">
-							<i class="fa fa-calendar-o"></i> 2016年3月13日
+							<i class="fa fa-calendar-o"></i> {:date("Y年m月d",strtotime($vo['post_date']))}
 						</span>
                     <span class="comments-link">
 							<a href="#" class="ds-thread-count" target="_self">
@@ -85,89 +105,24 @@
 						</span>
                 </div>
                 <div class="post-content post-expect">
-                    <p>个人博客技术演进的流水账 一人观点，难免片面和错误，欢迎讨论和进行斧正，: )
-                        <a href="#" class="btn btn-primary btn-xs" style="text-indent: 0;">阅读全文</a>
+                    <p>{$vo.post_excerpt}
+                        <a href="{:leuu('article/index',array('id'=>$vo['tid']))}" class="btn btn-primary btn-xs" style="text-indent: 0;">阅读全文</a>
                     </p>
                 </div>
                 <div class="meta-box">
                     <span class="cat-links">
 							<i class="fa fa-navicon"></i>
 							<b>分类:</b>
-							<a href="#" rel="category tag" target="_self">生活随笔</a>
-						</span>
+							<a href="{:leuu('list/index',array('id'=>$vo['term_id']))}" rel="category tag" target="_self">{$term.name}</a>
+					</span>
                     <span class="tag-links">
 							<i class="fa fa-tags"></i><b>标签:</b>
-							<a href="#" rel="tag" target="_self">技术演化</a>
-						</span>
+							<a href="#" rel="tag" target="_self">{$vo.post_keywords}</a>
+					</span>
                 </div>
             </div>
         </div>
-        <!--更新文章-->
-        <div class="row">
-            <div class="col-md-12 post-container">
-                <h2 class="post-title">
-						<a href="#" rel="bookmark">个人博客技术演进的流水账</a>
-					</h2>
-                <div class="meta-box">
-                    <span class="m-post-date">
-							<i class="fa fa-calendar-o"></i> 2016年3月13日
-						</span>
-                    <span class="comments-link">
-							<a href="#" class="ds-thread-count" target="_self">
-								<i class="fa fa-comments-o"></i> 留言</a>
-						</span>
-                </div>
-                <div class="post-content post-expect">
-                    <p>个人博客技术演进的流水账 一人观点，难免片面和错误，欢迎讨论和进行斧正，: )
-                        <a href="#" class="btn btn-primary btn-xs" style="text-indent: 0;">阅读全文</a>
-                    </p>
-                </div>
-                <div class="meta-box">
-                    <span class="cat-links">
-							<i class="fa fa-navicon"></i>
-							<b>分类:</b>
-							<a href="#" rel="category tag" target="_self">生活随笔</a>
-						</span>
-                    <span class="tag-links">
-							<i class="fa fa-tags"></i><b>标签:</b>
-							<a href="#" rel="tag" target="_self">技术演化</a>
-						</span>
-                </div>
-            </div>
-        </div>
-        <!--更新文章-->
-        <div class="row">
-            <div class="col-md-12 post-container">
-                <h2 class="post-title">
-						<a href="#" rel="bookmark">个人博客技术演进的流水账</a>
-					</h2>
-                <div class="meta-box">
-                    <span class="m-post-date">
-							<i class="fa fa-calendar-o"></i> 2016年3月13日
-						</span>
-                    <span class="comments-link">
-							<a href="#" class="ds-thread-count" target="_self">
-								<i class="fa fa-comments-o"></i> 留言</a>
-						</span>
-                </div>
-                <div class="post-content post-expect">
-                    <p>个人博客技术演进的流水账 一人观点，难免片面和错误，欢迎讨论和进行斧正，: )
-                        <a href="#" class="btn btn-primary btn-xs" style="text-indent: 0;">阅读全文</a>
-                    </p>
-                </div>
-                <div class="meta-box">
-                    <span class="cat-links">
-							<i class="fa fa-navicon"></i>
-							<b>分类:</b>
-							<a href="#" rel="category tag" target="_self">生活随笔</a>
-						</span>
-                    <span class="tag-links">
-							<i class="fa fa-tags"></i><b>标签:</b>
-							<a href="#" rel="tag" target="_self">技术演化</a>
-						</span>
-                </div>
-            </div>
-        </div>
+        </foreach>
         <!--more con sta-->
         <div class="row">
             <div class="col-md-12">
@@ -185,13 +140,13 @@
                 <div class="hr_25"></div>
                 <div class="row">
                     <div class="col-md-4">
-                        <a href="#" class="thumbnail"><img src="__TMPL__Public/img/works.png" alt="作品展示"></a>
+                        <a href="/blog/index.php?m=list&a=index&id=3" class="thumbnail"><img src="__TMPL__Public/img/works.png" alt="生活点滴"></a>
                     </div>
                     <div class="col-md-4">
-                        <a href="#" class="thumbnail"><img src="__TMPL__Public/img/study.png" alt="学习点滴"></a>
+                        <a href="/blog/index.php?m=list&a=index&id=4" class="thumbnail"><img src="__TMPL__Public/img/study.png" alt="学习点滴"></a>
                     </div>
                     <div class="col-md-4">
-                        <a href="#" class="thumbnail"><img src="__TMPL__Public/img/books.png" alt="书籍推荐"></a>
+                        <a href="/blog/index.php?m=list&a=index&id=18" class="thumbnail"><img src="__TMPL__Public/img/books.png" alt="书籍推荐"></a>
                     </div>
                 </div>
             </div>
