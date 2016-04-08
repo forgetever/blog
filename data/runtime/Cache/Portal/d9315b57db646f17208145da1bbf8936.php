@@ -112,39 +112,101 @@
           描述：nav end
         -->
 
-		<!--content-->
-		<div class="container-fluid mcontainer"  style="background: #F2F2F2;">
-			<!--about sta-->
-			<div class="container">
-				<div class="row">
-					<main class="col-md-12 main-content">
-						<div class="page-title">
-							<h1>关于系统</h1>
-						</div>
-						<ul class="timeline animated">
-							<?php $result = sp_sql_posts_paged("cid:$cat_id;order:post_date DESC;"); ?>
-							<?php if(is_array($result['posts'])): $i = 0; $__LIST__ = $result['posts'];if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($i % 2 );++$i; $smeta=json_decode($vo['smeta'], true); $term=sp_get_term($vo['term_id'] ); ?>
-								<li >
-									<div class="timeline-time">
-										<strong><?php echo date("Y年m月d",strtotime($vo['post_date']));?></strong>
-									</div>
-									<div class="timeline-icon">
-										<div class="bg-success">
-											<i class="fa fa-clock-o"></i>
-										</div>
-									</div>
-									<div class="timeline-content">
-										<h2><?php echo ($vo["post_title"]); ?></h2>
-										<p><?php echo ($vo["post_content"]); ?></p>
-									</div>
-								</li><?php endforeach; endif; else: echo "" ;endif; ?>
-							
-						</ul>
-					</main>
-				</div>
-			</div>
-			<!--about end-->
-			<br>
+    <!--pic show sta-->
+    <div class="feature-cover-container" style="width: 245px; opacity: 1;display: block;">
+        <div class="feature-cover-box">
+            <h3>新年寄语</h3>
+            <p class="feature-cover-content">潜心磨剑，藏器于身。</p>
+        </div>
+        <div class="feature-cover-bg" style="width: 100%; height: 100%; background-image: url(http://tu.ihuan.me/api/bing/go);">
+        </div>
+    </div>
+    <!--pic show end-->
+    <!--更新or分类+footer-->
+    <div class="container-fluid main-container" id="main-container">
+        <!--main con sta-->
+        <div class="row">
+            <div class="col-md-6 col-xs-6">
+                <h2 class="page-title"><?php echo ($name); ?></h2>
+            </div>
+            <!--login sta-->
+            <div class="col-md-6 col-xs-6">
+                <ul class="nav pull-right" id="main-menu-user">
+                    <li class="dropdown user login">
+                        <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" href="#">
+                            <img src="/blog/themes/myblog//Public/img/headicon.png" class="headicon" width='26' />
+                            <span class="user-nicename"></span><b class="caret"></b></a>
+                        <ul class="dropdown-menu
+">
+                            <li><a href="<?php echo U('user/center/index');?>"><i class="fa fa-user"></i> &nbsp;个人中心</a></li>
+                            <li class="divider"></li>
+                            <li><a href="<?php echo U('user/index/logout');?>"><i class="fa fa-sign-out"></i> &nbsp;退出</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown user offline">
+                        <a class="dropdown-toggle user" data-toggle="dropdown" href="#">
+                            <img src="/blog/themes/myblog//Public/img/headicon.png" class="headicon" width='26' />登录<b class="caret"></b>
+                        </a>
+                        <ul class="dropdown-menu pull-right">
+                            <li><a href="<?php echo U('api/oauth/login',array('type'=>'sina'));?>"><i class="fa fa-weibo"></i> &nbsp;微博登录</a></li>
+                            <li><a href="<?php echo U('api/oauth/login',array('type'=>'qq'));?>"><i class="fa fa-qq"></i> &nbsp;QQ登录</a></li>
+                            <li><a href="<?php echo leuu('user/login/index');?>"><i class="fa fa-sign-in"></i> &nbsp;登录</a></li>
+                            <li class="divider"></li>
+                            <li><a href="<?php echo leuu('user/register/index');?>"><i class="fa fa-user"></i> &nbsp;注册</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+            <!--login end-->
+        </div>
+        <div class="post-content">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="thumbnail">
+                        <a href="javascript:;"><img src="/blog/themes/myblog/Public/img/links.jpg"></a>
+                        <div class="caption">
+                            <h3>关于链接</h3>
+                            <p>这个年代坚持写blog的人似乎真的是愈发少了，不知道我们会不会是最后一批部落格主，:D</p>
+                            <p><span class="label label-info">EXEC: SORT LINK ORDER BY DATE ASC</span></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="list-group" id="site-link-list">
+                <?php $links=sp_getlinks(); ?>
+                <?php if(is_array($links)): foreach($links as $key=>$vo): ?><a class="list-group-item" target="_blank" href="<?php echo ($vo["link_url"]); ?>">
+                        <h4 class="list-group-item-heading">
+							<i class="fa fa-link"></i><?php echo ($vo["link_description"]); ?> <!--描述-->
+						</h4>
+                        <p class="list-group-item-text"><?php echo ($vo["link_name"]); ?>
+                            <!--链接名称-->
+                        </p>
+                    </a><?php endforeach; endif; ?>
+                <!--<a class="list-group-item" target="_blank" href="#">
+						<h4 class="list-group-item-heading">
+							<i class="fa fa-link"></i>鬼鬼
+						</h4>
+						<p class="list-group-item-text">颜彦姐姐的博客</p>
+					</a>
+					<a class="list-group-item" target="_blank" href="#">
+						<h4 class="list-group-item-heading">
+							<i class="fa fa-link"></i>鬼鬼
+						</h4>
+						<p class="list-group-item-text">颜彦姐姐的博客</p>
+					</a><a class="list-group-item" target="_blank" href="#">
+						<h4 class="list-group-item-heading">
+							<i class="fa fa-link"></i>鬼鬼
+						</h4>
+						<p class="list-group-item-text">颜彦姐姐的博客</p>
+					</a><a class="list-group-item" target="_blank" href="#">
+						<h4 class="list-group-item-heading">
+							<i class="fa fa-link"></i>鬼鬼
+						</h4>
+						<p class="list-group-item-text">颜彦姐姐的博客</p>
+					</a>-->
+            </div>
+        </div>
+        <br>
 <br>
 <br>
 <!-- Footer ================================================== -->
@@ -253,7 +315,6 @@ var GV = {
 $('#main-menu-user li.dropdown,#main-menu-user .dropdown-menu').mouseover(function() {   
      $(this).addClass('open');    }).mouseout(function() {        $(this).removeClass('open');    }); 
 </script> <?php echo hook('footer_end');?>
-    <script src="/blog/themes/myblog/Public/js/timeline.js" type="text/javascript" charset="utf-8"></script>
 </body>
 
 </html>

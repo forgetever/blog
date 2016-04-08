@@ -6,7 +6,7 @@
     <meta name="keywords" content="<?php echo ($site_seo_keywords); ?>" />
     <meta name="description" content="<?php echo ($site_seo_description); ?>">
     	<?php  function _sp_helloworld(){ echo "hello ThinkCMF!"; } function _sp_helloworld2(){ echo "hello ThinkCMF2!"; } function _sp_helloworld3(){ echo "hello ThinkCMF3!"; } ?>
-	<?php $portal_index_lastnews="11,13"; $portal_hot_articles="1,2"; $portal_last_post="1,2"; $tmpl=sp_get_theme_path(); ?>
+	<?php $portal_index_lastnews="9,10,11,12,13,14,15,16,17,18"; $portal_hot_articles="9,10,11,12,13,14,15,16,17,18"; $portal_last_post="1,2"; $tmpl=sp_get_theme_path(); ?>
 	<meta name="author" content="zp">
 	<meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -35,41 +35,43 @@
 		#backtotop{position: fixed;bottom: 50px;right:20px;display: none;cursor: pointer;font-size: 50px;z-index: 9999;}
 		#backtotop:hover{color:#333}
 		#main-menu-user li.user{display: none}
+		#main-menu-user .dropdown-menu{
+			top: 42px;
+		}
 	</style>
 	
 </head>
 
 <body class="body-white">
     <?php echo hook('body_start');?>
-
 <!--
-        	作者：791458703@qq.com
-        	时间：2016-04-02
-        	描述：nav sta
+          作者：791458703@qq.com
+          时间：2016-04-02
+          描述：nav sta
         -->
 <nav class="navbar g-navbar-box navbar-inverse" role="navigation" id="Js_page-navbar">
     <!--g-navbar-box 重写默认样式,使导航固定于左侧-->
     <!--nav logo-->
     <div class="navbar-header">
         <!--为了给导航栏添加响应式特性，
-				您要折叠的内容必须包裹在带有 classes .collapse、.navbar-collapse 的 <div> 中。
-				折叠起来的导航栏实际上是一个带有 class .navbar-toggle 及两个 data- 元素的按钮。
-				第一个是 data-toggle，用于告诉 JavaScript 需要对按钮做什么，
-				第二个是 data-target，指示要切换到哪一个元素。
-				三个带有 class .icon-bar 的 <span> 创建所谓的汉堡按钮。这些会切换为 .nav-collapse <div> 中的元素-->
+        您要折叠的内容必须包裹在带有 classes .collapse、.navbar-collapse 的 <div> 中。
+        折叠起来的导航栏实际上是一个带有 class .navbar-toggle 及两个 data- 元素的按钮。
+        第一个是 data-toggle，用于告诉 JavaScript 需要对按钮做什么，
+        第二个是 data-target，指示要切换到哪一个元素。
+        三个带有 class .icon-bar 的 <span> 创建所谓的汉堡按钮。这些会切换为 .nav-collapse <div> 中的元素-->
         <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse" aria-expanded="false">
             <span class="sr-only">Toggle navigation</span>
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="index.html">My Blog</a>
+        <a class="navbar-brand" href="#">My Blog</a>
     </div>
     <!--nav logo-->
     <div class="collapse navbar-collapse">
-    <?php
+        <?php
  $effected_id="JS_nav_list"; $filetpl="<a href='\$href' target='\$target'>\$label</a>"; $foldertpl="<a href='\$href' target='\$target' >\$label </a>"; $ul_class="dropdown-menu bounceOutDown" ; $li_class="" ; $style="nav navbar-nav navbar-right navbar-inverse"; $showlevel=6; $dropdown='menu-item'; echo sp_get_menu("main",$effected_id,$filetpl,$foldertpl,$ul_class,$li_class,$style,$showlevel,$dropdown); ?>
-       <!--  <ul class="nav navbar-nav navbar-right navbar-inverse" id="JS_nav_list">
+            <!--  <ul class="nav navbar-nav navbar-right navbar-inverse" id="JS_nav_list">
            <li class="menu-item"><a class="menu-item-link" href="index.html" target="_self">网站首页</a></li>
            <li class="menu-item"><a class="menu-item-link" href="#" target="_self">生活点滴</a>
                <ul class="dropdown-menu bounceOutDown ">
@@ -101,12 +103,13 @@
            <li class="menu-item"><a class="menu-item-link" href="contact.html" target="_self">给我留言</a></li>
            <li class="menu-item"><a class="menu-item-link" href="about.html" target="_self">关于系统</a></li>
        </ul> -->
+        
     </div>
 </nav>
 <!--
-        	作者：791458703@qq.com
-        	时间：2016-04-02
-        	描述：nav end
+          作者：791458703@qq.com
+          时间：2016-04-02
+          描述：nav end
         -->
 
 		<!--content-->
@@ -138,11 +141,35 @@
 							<a href="#" rel="tag" target="_self">更新文档</a>
 						</span>
 					</div>
-					<div class="hr_25">
+					<div class="hr_25">	</div>
+					<div class="hr_25">	</div>
+					<?php if(!empty($post_source)): ?><div>
+	                        <b>注：本文转载自<?php echo ($post_source); ?>，转载目的在于传递更多信息，并不代表本网赞同其观点和对其真实性负责。如有侵权行为，请联系我们，我们会及时删除。</b>
+	                    </div><?php endif; ?>
+		    		<div>
+						<?php if(!empty($prev)): ?><a href="<?php echo leuu('article/index',array('id'=>$prev['tid'],'cid'=>$prev['term_id']));?>" class="btn btn-primary pull-left">上一篇</a><?php endif; ?>
+							<?php if(!empty($next)): ?><a href="<?php echo leuu('article/index',array('id'=>$next['tid'],'cid'=>$next['term_id']));?>" class="btn btn-warning pull-right">下一篇</a><?php endif; ?>
+	    	            <script type="text/javascript" src="/blog/themes/myblog/Public/js/qrcode.min.js"></script>
+	                    <div id="qrcode" style="width: 100px;margin:0 auto"></div>
+	    					<script type="text/javascript">
+	                        var qrcode = new QRCode(document.getElementById("qrcode"), {
+	                        width : 100,
+	                        height : 100
+	                        });
+	                        function makeCode () {		
+	                        qrcode.makeCode("http://<?php echo ($_SERVER['HTTP_HOST']); echo ($_SERVER['REQUEST_URI']); ?>");
+	                        }
+	                        makeCode();
+	                        </script>
+						<div class="clearfix"></div>
 						
-					</div>
+				</div>
+					
 				</div>
 			</div>
+			
+			<?php echo Comments("posts",$object_id);?>
+
 			<br>
 <br>
 <br>
@@ -181,10 +208,77 @@ var GV = {
 <!-- Le javascript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
+	<!-- <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+	<script src="http://code.jquery.com/jquery-migrate-1.2.1.js"></script> -->
 	<script src="/blog/themes/myblog/Public/js/jquery-1.11.3.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="/blog/themes/myblog/Public/js/jquery-migrate-1.2.1.js" type="text/javascript" charset="utf-8"></script>
+	<script src="/blog/public/js/wind.js"></script>
 	<script src="/blog/themes/myblog/Public/js/bootstrap.min.js" type="text/javascript" charset="utf-8"></script>
-
- <?php echo hook('footer_end');?>
+	 
+    <script src="/blog/public/js/frontend.js"></script>
+<script>
+	$(function(){
+		$('body').on('touchstart.dropdown', '.dropdown-menu', function (e) { e.stopPropagation(); });
+		
+		$("#main-menu li.dropdown").hover(function(){
+			$(this).addClass("open");
+		},function(){
+			$(this).removeClass("open");
+		});
+		
+		$.post("<?php echo U('user/index/is_login');?>",{},function(data){
+			if(data.status==1){
+				if(data.user.avatar){
+					$("#main-menu-user .headicon").attr("src",data.user.avatar.indexOf("http")==0?data.user.avatar:"/blog/data/upload/avatar/"+data.user.avatar);
+				}
+				
+				$("#main-menu-user .user-nicename").text(data.user.user_nicename!=""?data.user.user_nicename:data.user.user_login);
+				$("#main-menu-user li.login").show();
+				
+			}
+			if(data.status==0){
+				$("#main-menu-user li.offline").show();
+			}
+			
+		});	
+		;(function($){
+			$.fn.totop=function(opt){
+				var scrolling=false;
+				return this.each(function(){
+					var $this=$(this);
+					$(window).scroll(function(){
+						if(!scrolling){
+							var sd=$(window).scrollTop();
+							if(sd>100){
+								$this.fadeIn();
+							}else{
+								$this.fadeOut();
+							}
+						}
+					});
+					
+					$this.click(function(){
+						scrolling=true;
+						$('html, body').animate({
+							scrollTop : 0
+						}, 500,function(){
+							scrolling=false;
+							$this.fadeOut();
+						});
+					});
+				});
+			};
+		})(jQuery); 
+		
+		$("#backtotop").totop();
+		
+		
+	});
+	</script>
+	 <script>    
+$('#main-menu-user li.dropdown,#main-menu-user .dropdown-menu').mouseover(function() {   
+     $(this).addClass('open');    }).mouseout(function() {        $(this).removeClass('open');    }); 
+</script> <?php echo hook('footer_end');?>
 </body>
 
 </html>

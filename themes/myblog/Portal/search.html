@@ -57,58 +57,59 @@
             </div>
             <!--login end-->
         </div>
-        <div class="post-content">
+        <php>
+            $result=sp_sql_posts_paged_bykeyword($keyword,"",20);
+        </php>
+        <h3>'{$keyword}' 搜索结果 </h3>
+        <p>{$result['count']}条结果</p>
+        <volist name="result['posts']" id="vo">
+            <php>
+                $smeta=json_decode($vo['smeta'], true);
+                $term=sp_get_term($vo['term_id'] );
+            </php>
+            <!--更新文章-->
             <div class="row">
-                <div class="col-md-12">
-                    <div class="thumbnail">
-                        <a href="javascript:;"><img src="__TMPL__Public/img/links.jpg"></a>
-                        <div class="caption">
-                            <h3>关于链接</h3>
-                            <p>这个年代坚持写blog的人似乎真的是愈发少了，不知道我们会不会是最后一批部落格主，:D</p>
-                            <p><span class="label label-info">EXEC: SORT LINK ORDER BY DATE ASC</span></p>
-                        </div>
+                <div class="col-md-12 post-container">
+                    <h2 class="post-title">
+						<a href="{:leuu('article/index',array('id'=>$vo['tid']))}" rel="bookmark">{$vo.post_title}</a>
+					</h2>
+                    <div class="meta-box">
+                        <span class="m-post-date">
+							<i class="fa fa-calendar-o"></i><!--  2016年3月13日 -->
+							{:date("Y年m月d",strtotime($vo['post_date']))}
+						</span>
+                        <span class="comments-link">
+							<a href="#" class="ds-thread-count" target="_self">
+								<i class="fa fa-comments-o"></i> 留言</a>
+						</span>
+                    </div>
+                    <div class="post-content post-expect">
+                        <p>{$vo.post_excerpt}
+                            <a href="{:leuu('article/index',array('id'=>$vo['tid']))}" class="btn btn-primary btn-xs" style="text-indent: 0;">阅读全文</a>
+                        </p>
+                    </div>
+                    <div class="meta-box">
+                        <span class="cat-links">
+							<i class="fa fa-navicon"></i>
+							<b>分类:</b>
+							<a href="{:leuu('list/index',array('id'=>$vo['term_id']))}" rel="category tag" target="_self">{$term.name}</a>
+						</span>
+                        <span class="tag-links">
+							<i class="fa fa-tags"></i><b>标签:</b>
+							<a href="#" rel="tag" target="_self">{$vo.post_keywords}</a>
+						</span>
                     </div>
                 </div>
             </div>
-            <div class="list-group" id="site-link-list">
-                <php>
-                    $links=sp_getlinks();
-                </php>
-                <foreach name="links" item="vo">
-                    <a class="list-group-item" target="_blank" href="{$vo.link_url}">
-                        <h4 class="list-group-item-heading">
-							<i class="fa fa-link"></i>{$vo.link_description} <!--描述-->
-						</h4>
-                        <p class="list-group-item-text">{$vo.link_name}
-                            <!--链接名称-->
-                        </p>
-                    </a>
-                </foreach>
-                <!--<a class="list-group-item" target="_blank" href="#">
-						<h4 class="list-group-item-heading">
-							<i class="fa fa-link"></i>鬼鬼
-						</h4>
-						<p class="list-group-item-text">颜彦姐姐的博客</p>
-					</a>
-					<a class="list-group-item" target="_blank" href="#">
-						<h4 class="list-group-item-heading">
-							<i class="fa fa-link"></i>鬼鬼
-						</h4>
-						<p class="list-group-item-text">颜彦姐姐的博客</p>
-					</a><a class="list-group-item" target="_blank" href="#">
-						<h4 class="list-group-item-heading">
-							<i class="fa fa-link"></i>鬼鬼
-						</h4>
-						<p class="list-group-item-text">颜彦姐姐的博客</p>
-					</a><a class="list-group-item" target="_blank" href="#">
-						<h4 class="list-group-item-heading">
-							<i class="fa fa-link"></i>鬼鬼
-						</h4>
-						<p class="list-group-item-text">颜彦姐姐的博客</p>
-					</a>-->
-            </div>
+        </volist>
+        <div class="pagination">
+            <ul>
+                {$result['page']}
+            </ul>
         </div>
-        <tc_include file="Public:footer" />
+    </div>
+    <!--main con end-->
+    <tc_include file="Public:footer" />
     </div>
     <tc_include file="Public:scripts" /> {:hook('footer_end')}
 </body>

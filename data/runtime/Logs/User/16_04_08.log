@@ -1,0 +1,49 @@
+[ 2016-04-08T15:31:58+08:00 ] ::1 /blog/index.php?g=user&m=index&a=is_login
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: Run Behavior\CheckLangBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.002000s ]
+NOTIC: [8] Undefined index: url E:\opt\phpstudy\WWW\blog\application\Common\Controller\AppframeController.class.php 第 24 行.
+
+[ 2016-04-08T15:34:34+08:00 ] ::1 /blog/index.php?g=user&m=index&a=is_login
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: Run Behavior\CheckLangBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.002000s ]
+NOTIC: [8] Undefined index: url E:\opt\phpstudy\WWW\blog\application\Common\Controller\AppframeController.class.php 第 24 行.
+
+[ 2016-04-08T15:38:19+08:00 ] ::1 /blog/index.php?g=user&m=index&a=is_login
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001001s ]
+INFO: Run Behavior\CheckLangBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.002001s ]
+NOTIC: [8] Undefined index: url E:\opt\phpstudy\WWW\blog\application\Common\Controller\AppframeController.class.php 第 24 行.
+
+[ 2016-04-08T15:39:08+08:00 ] ::1 /blog/index.php?g=user&m=index&a=is_login
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: Run Behavior\CheckLangBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.002000s ]
+NOTIC: [8] Undefined index: url E:\opt\phpstudy\WWW\blog\application\Common\Controller\AppframeController.class.php 第 24 行.
+
+[ 2016-04-08T15:39:10+08:00 ] ::1 /blog/index.php?g=user&m=index&a=is_login
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: Run Behavior\CheckLangBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.003000s ]
+NOTIC: [8] Undefined index: url E:\opt\phpstudy\WWW\blog\application\Common\Controller\AppframeController.class.php 第 24 行.
+
+[ 2016-04-08T15:39:25+08:00 ] ::1 /blog/index.php?g=user&m=index&a=is_login
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: Run Behavior\CheckLangBehavior [ RunTime:0.002000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.003000s ]
+NOTIC: [8] Undefined index: url E:\opt\phpstudy\WWW\blog\application\Common\Controller\AppframeController.class.php 第 24 行.
+
+[ 2016-04-08T15:39:28+08:00 ] ::1 /blog/index.php?g=user&m=index&a=is_login
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: Run Behavior\CheckLangBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.002000s ]
+NOTIC: [8] Undefined index: url E:\opt\phpstudy\WWW\blog\application\Common\Controller\AppframeController.class.php 第 24 行.
+

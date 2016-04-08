@@ -44,36 +44,39 @@ var GV = {
 			z-index:9999;
 		}
 	</style><?php endif; ?>
-<style>
-li {
-	list-style: none;
-}
-</style>
 </head>
 <body>
 	<div class="wrap">
-		<div id="error_tips">
-			<h2><?php echo L('CACHE_CLEARED');?></h2>
-			<div class="error_cont">
-				<ul>
-					<li><?php echo L('CACHE_CLEARED');?></li>
-				</ul>
-				<div class="error_return">
-					<a href="javascript:close_app();" class="btn"><?php echo L('CLOSE');?></a>
+		<ul class="nav nav-tabs">
+			<li><a href="<?php echo U('User/userinfo');?>"><?php echo L('ADMIN_USER_USERINFO');?></a></li>
+			<li class="active"><a href="<?php echo U('setting/password');?>"><?php echo L('ADMIN_SETTING_PASSWORD');?></a></li>
+		</ul>
+		<form class="form-horizontal js-ajax-form" method="post" action="<?php echo U('setting/password_post');?>">
+			<fieldset>
+				<div class="control-group">
+					<label class="control-label" for="input-old-password"><?php echo L('OLD_PASSWORD');?></label>
+					<div class="controls">
+						<input type="password" class="input-xlarge" id="input-old-password" name="old_password">
+					</div>
 				</div>
-			</div>
-		</div>
+				<div class="control-group">
+					<label class="control-label" for="input-password"><?php echo L('NEW_PASSWORD');?></label>
+					<div class="controls">
+						<input type="password" class="input-xlarge" id="input-password" name="password">
+					</div>
+				</div>
+				<div class="control-group">
+					<label class="control-label" for="input-repassword"><?php echo L('CONFIRM_PASSWORD');?></label>
+					<div class="controls">
+						<input type="password" class="input-xlarge" id="input-repassword" name="repassword">
+					</div>
+				</div>
+				<div class="form-actions">
+					<button type="submit" class="btn btn-primary  js-ajax-submit"><?php echo L('SAVE');?></button>
+				</div>
+			</fieldset>
+		</form>
 	</div>
 	<script src="/blog/public/js/common.js"></script>
-	<script>
-		var close_timeout = setTimeout(function() {
-			parent.close_current_app();
-		}, 3000);
-
-		function close_app() {
-			clearTimeout(close_timeout);
-			parent.close_current_app();
-		}
-	</script>
 </body>
 </html>

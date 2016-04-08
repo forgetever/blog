@@ -23,19 +23,19 @@
                                <div class="tab-content">
                                    <div class="tab-pane active" id="one">
                                    		<form class="form-horizontal js-ajax-form" action="{:U('profile/edit_post')}" method="post">
-                                   			<div class="control-group">
+                                   			<div class="form-group">
                                    				<label class="control-label" for="input-user_nicename">昵称</label>
                                    				<div class="controls">
-                                   					<input type="text" id="input-user_nicename" placeholder="昵称" name="user_nicename" value="{$user_nicename}">
+                                   					<input type="text" id="input-user_nicename" placeholder="昵称" class="form-control" name="user_nicename" value="{$user_nicename}">
                                    				</div>
                                    			</div>
-                                   			<div class="control-group">
+                                   			<div class="form-group">
                                    				<label class="control-label" for="input-sex">性别</label>
                                    				<div class="controls">
                                    					<php>
 	                                   				$sexs=array("0"=>"保密","1"=>"程序猿","2"=>"程序媛");
 	                                   				</php>
-                                   					<select id="input-sex" name="sex">
+                                   					<select id="input-sex" name="sex" class="form-control">
                                    						<foreach name="sexs" item="vo">
                                    						<php>$sexselected=$key==$sex?"selected":"";</php>
                                    							<option value="{$key}" {$sexselected}>{$vo}</option>
@@ -43,25 +43,25 @@
                                    					</select>
                                    				</div>
                                    			</div>
-                                   			<div class="control-group">
+                                   			<div class="form-group">
                                    				<label class="control-label" for="input-birthday">生日</label>
                                    				<div class="controls">
-                                   					<input class="js-date" type="text" id="input-birthday" placeholder="2013-01-04" name="birthday" value="{$birthday}">
+                                   					<input class="js-date" type="text" id="input-birthday" placeholder="2013-01-04" class="form-control" name="birthday" value="{$birthday}">
                                    				</div>
                                    			</div>
-                                   			<div class="control-group">
+                                   			<div class="form-group">
                                    				<label class="control-label" for="input-user_url">个人网址</label>
                                    				<div class="controls">
-                                   					<input type="text" id="input-user_url" placeholder="http://thinkcmf.com" name="user_url" value="{$user_url}">
+                                   					<input type="text" id="input-user_url" placeholder="http://thinkcmf.com" class="form-control" name="user_url" value="{$user_url}">
                                    				</div>
                                    			</div>
-                                   			<div class="control-group">
-                                   				<label class="control-label" for="input-signature">个性签名</label>
+                                   			<div class="form-group">
+                                   				<label class="control-label form-control" for="input-signature">个性签名</label>
                                    				<div class="controls">
-                                   					<textarea id="input-signature" placeholder="个性签名" name="signature">{$signature}</textarea>
+                                   					<textarea id="input-signature" placeholder="个性签名" name="signature" >{$signature}</textarea>
                                    				</div>
                                    			</div>
-                                   			<div class="control-group">
+                                   			<div class="form-group">
                                    				<div class="controls">
                                    					<button type="submit" class="btn js-ajax-submit">保存</button>
                                    				</div>

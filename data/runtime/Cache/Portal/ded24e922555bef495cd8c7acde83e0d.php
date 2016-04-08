@@ -35,41 +35,43 @@
 		#backtotop{position: fixed;bottom: 50px;right:20px;display: none;cursor: pointer;font-size: 50px;z-index: 9999;}
 		#backtotop:hover{color:#333}
 		#main-menu-user li.user{display: none}
+		#main-menu-user .dropdown-menu{
+			top: 42px;
+		}
 	</style>
 	
 </head>
 
 <body class="body-white">
     <?php echo hook('body_start');?>
-
 <!--
-        	作者：791458703@qq.com
-        	时间：2016-04-02
-        	描述：nav sta
+          作者：791458703@qq.com
+          时间：2016-04-02
+          描述：nav sta
         -->
 <nav class="navbar g-navbar-box navbar-inverse" role="navigation" id="Js_page-navbar">
     <!--g-navbar-box 重写默认样式,使导航固定于左侧-->
     <!--nav logo-->
     <div class="navbar-header">
         <!--为了给导航栏添加响应式特性，
-				您要折叠的内容必须包裹在带有 classes .collapse、.navbar-collapse 的 <div> 中。
-				折叠起来的导航栏实际上是一个带有 class .navbar-toggle 及两个 data- 元素的按钮。
-				第一个是 data-toggle，用于告诉 JavaScript 需要对按钮做什么，
-				第二个是 data-target，指示要切换到哪一个元素。
-				三个带有 class .icon-bar 的 <span> 创建所谓的汉堡按钮。这些会切换为 .nav-collapse <div> 中的元素-->
+        您要折叠的内容必须包裹在带有 classes .collapse、.navbar-collapse 的 <div> 中。
+        折叠起来的导航栏实际上是一个带有 class .navbar-toggle 及两个 data- 元素的按钮。
+        第一个是 data-toggle，用于告诉 JavaScript 需要对按钮做什么，
+        第二个是 data-target，指示要切换到哪一个元素。
+        三个带有 class .icon-bar 的 <span> 创建所谓的汉堡按钮。这些会切换为 .nav-collapse <div> 中的元素-->
         <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse" aria-expanded="false">
             <span class="sr-only">Toggle navigation</span>
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="index.html">My Blog</a>
+        <a class="navbar-brand" href="#">My Blog</a>
     </div>
     <!--nav logo-->
     <div class="collapse navbar-collapse">
-    <?php
+        <?php
  $effected_id="JS_nav_list"; $filetpl="<a href='\$href' target='\$target'>\$label</a>"; $foldertpl="<a href='\$href' target='\$target' >\$label </a>"; $ul_class="dropdown-menu bounceOutDown" ; $li_class="" ; $style="nav navbar-nav navbar-right navbar-inverse"; $showlevel=6; $dropdown='menu-item'; echo sp_get_menu("main",$effected_id,$filetpl,$foldertpl,$ul_class,$li_class,$style,$showlevel,$dropdown); ?>
-       <!--  <ul class="nav navbar-nav navbar-right navbar-inverse" id="JS_nav_list">
+            <!--  <ul class="nav navbar-nav navbar-right navbar-inverse" id="JS_nav_list">
            <li class="menu-item"><a class="menu-item-link" href="index.html" target="_self">网站首页</a></li>
            <li class="menu-item"><a class="menu-item-link" href="#" target="_self">生活点滴</a>
                <ul class="dropdown-menu bounceOutDown ">
@@ -101,12 +103,13 @@
            <li class="menu-item"><a class="menu-item-link" href="contact.html" target="_self">给我留言</a></li>
            <li class="menu-item"><a class="menu-item-link" href="about.html" target="_self">关于系统</a></li>
        </ul> -->
+        
     </div>
 </nav>
 <!--
-        	作者：791458703@qq.com
-        	时间：2016-04-02
-        	描述：nav end
+          作者：791458703@qq.com
+          时间：2016-04-02
+          描述：nav end
         -->
 
     <!--pic show sta-->
@@ -115,7 +118,7 @@
             <h3>新年寄语</h3>
             <p class="feature-cover-content">潜心磨剑，藏器于身。</p>
         </div>
-        <div class="feature-cover-bg" style="width: 100%; height: 100%; background-image: url(/blog/themes/myblog/Public/img/feature-cover-leaf.jpg);">
+        <div class="feature-cover-bg" style="width: 100%; height: 100%; background-image: url(http://tu.ihuan.me/api/bing/go);">
         </div>
     </div>
     <!--pic show end-->
@@ -131,14 +134,46 @@
 								推荐阅读
 							</div>
 							<div class="col-md-6 col-xs-6">
-								<div class="input-group page-search-box clearfix">
-									<input type="text" class="form-control pull-right" placeholder="搜索站内">
-									<span class="input-group-btn">
-										<a class="btn btn-default search-button" href="javascript:;">搜索</a>
-									</span>
-								</div>
+                                <ul class="nav pull-right" id="main-menu-user">
+                                    <li class="dropdown user login">
+                                        <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" href="#">
+                                        <img src="/blog/themes/myblog//Public/img/headicon.png" class="headicon" width='26'/>
+                                        <span class="user-nicename"></span><b class="caret"></b></a>
+                                        <ul class="dropdown-menu
+">
+                                           <li><a href="<?php echo U('user/center/index');?>"><i class="fa fa-user"></i> &nbsp;个人中心</a></li>
+                                           <li class="divider"></li>
+                                           <li><a href="<?php echo U('user/index/logout');?>"><i class="fa fa-sign-out"></i> &nbsp;退出</a></li>
+                                        </ul>
+                                    </li>
+                                    <li class="dropdown user offline">
+                                        <a class="dropdown-toggle user" data-toggle="dropdown" href="#">
+                                            <img src="/blog/themes/myblog//Public/img/headicon.png" class="headicon" width='26'/>登录<b class="caret"></b>
+                                        </a>
+                                        <ul class="dropdown-menu pull-right">
+                                           <li><a href="<?php echo U('api/oauth/login',array('type'=>'sina'));?>"><i class="fa fa-weibo"></i> &nbsp;微博登录</a></li>
+                                           <li><a href="<?php echo U('api/oauth/login',array('type'=>'qq'));?>"><i class="fa fa-qq"></i> &nbsp;QQ登录</a></li>
+                                           <li><a href="<?php echo leuu('user/login/index');?>"><i class="fa fa-sign-in"></i> &nbsp;登录</a></li>
+                                           <li class="divider"></li>
+                                           <li><a href="<?php echo leuu('user/register/index');?>"><i class="fa fa-user"></i> &nbsp;注册</a></li>
+                                        </ul>
+                                    </li>
+                                </ul>
+								
 							</div>
 						</div>
+                        <div class="row">
+                            <div class="input-group page-search-box pull-right clearfix">
+                                     <form method="post" class="form-inline" action="<?php echo U('portal/search/index');?>">
+                                        <div class="form-group">    
+                                        <input type="text" class="form-control" placeholder="搜索站内" value="<?php echo I('get.keyword');?>" name="keyword"/>
+                                        </div>
+                                        <button type="submit" class="btn btn-default search-button" href="javascript:;"value="搜索">搜索</button>
+                                        
+                                    </form> 
+                                    
+                                </div>
+                        </div>
 					</h2>
             </div>
             <!--search bar end-->
@@ -175,7 +210,7 @@
         </div>
         <!--更新文章-->
         <?php $lastnews=sp_sql_posts("cid:$portal_index_lastnews;
-				field:post_title,post_date,post_keywords,post_excerpt,tid,term_id,smeta;
+				field:post_title,post_date,post_keywords,post_hits,post_like,post_excerpt,tid,term_id,smeta;
 				order:post_date desc;limit:6;"); ?>
 		<?php if(is_array($lastnews)): foreach($lastnews as $key=>$vo): $term=sp_get_term($vo['term_id'] ); ?>
         <div class="row">
@@ -186,11 +221,14 @@
                 <div class="meta-box">
                     <span class="m-post-date">
 							<i class="fa fa-calendar-o"></i> <?php echo date("Y年m月d",strtotime($vo['post_date']));?>
-						</span>
+					</span>
                     <span class="comments-link">
-							<a href="#" class="ds-thread-count" target="_self">
-								<i class="fa fa-comments-o"></i> 留言</a>
-						</span>
+                          <a href="javascript:;"><i class="fa fa-eye"></i><span><?php echo ($vo["post_hits"]); ?></span></a>
+                            <a href="<?php echo U('article/do_like',array('id'=>$object_id));?>" class="js-count-btn"><i class="fa fa-thumbs-up"></i><span class="count"><?php echo ($vo["post_like"]); ?></span></a>
+                            <a href="<?php echo U('user/favorite/do_favorite',array('id'=>$object_id));?>" class="js-favorite-btn" data-title="<?php echo ($post_title); ?>" data-url="<?php echo leuu('article/index',array('id'=>$tid,'cid'=>$term_id));?>" data-key="<?php echo sp_get_favorite_key('posts',$object_id);?>">
+                            <i class="fa fa-star-o"></i> </a> 
+							
+					</span>
                 </div>
                 <div class="post-content post-expect">
                     <p><?php echo ($vo["post_excerpt"]); ?>
@@ -227,13 +265,13 @@
                 <div class="hr_25"></div>
                 <div class="row">
                     <div class="col-md-4">
-                        <a href="/blog/index.php?m=list&a=index&id=3" class="thumbnail"><img src="/blog/themes/myblog/Public/img/works.png" alt="生活点滴"></a>
+                        <a href="<?php echo leuu('list/index',array('id'=>3));?>" class="thumbnail"><img src="/blog/themes/myblog/Public/img/works.png" alt="生活点滴"></a>
                     </div>
                     <div class="col-md-4">
-                        <a href="/blog/index.php?m=list&a=index&id=4" class="thumbnail"><img src="/blog/themes/myblog/Public/img/study.png" alt="学习点滴"></a>
+                        <a href="<?php echo leuu('list/index',array('id'=>4));?>" class="thumbnail"><img src="/blog/themes/myblog/Public/img/study.png" alt="学习点滴"></a>
                     </div>
                     <div class="col-md-4">
-                        <a href="/blog/index.php?m=list&a=index&id=18" class="thumbnail"><img src="/blog/themes/myblog/Public/img/books.png" alt="书籍推荐"></a>
+                        <a href="<?php echo leuu('list/index',array('id'=>18));?>" class="thumbnail"><img src="/blog/themes/myblog/Public/img/books.png" alt="书籍推荐"></a>
                     </div>
                 </div>
             </div>
@@ -276,10 +314,78 @@ var GV = {
 <!-- Le javascript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
+	<!-- <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+	<script src="http://code.jquery.com/jquery-migrate-1.2.1.js"></script> -->
 	<script src="/blog/themes/myblog/Public/js/jquery-1.11.3.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="/blog/themes/myblog/Public/js/jquery-migrate-1.2.1.js" type="text/javascript" charset="utf-8"></script>
+	<script src="/blog/public/js/wind.js"></script>
 	<script src="/blog/themes/myblog/Public/js/bootstrap.min.js" type="text/javascript" charset="utf-8"></script>
-
- <?php echo hook('footer_end');?>
+	 
+    <script src="/blog/public/js/frontend.js"></script>
+<script>
+	$(function(){
+		$('body').on('touchstart.dropdown', '.dropdown-menu', function (e) { e.stopPropagation(); });
+		
+		$("#main-menu li.dropdown").hover(function(){
+			$(this).addClass("open");
+		},function(){
+			$(this).removeClass("open");
+		});
+		
+		$.post("<?php echo U('user/index/is_login');?>",{},function(data){
+			if(data.status==1){
+				if(data.user.avatar){
+					$("#main-menu-user .headicon").attr("src",data.user.avatar.indexOf("http")==0?data.user.avatar:"/blog/data/upload/avatar/"+data.user.avatar);
+				}
+				
+				$("#main-menu-user .user-nicename").text(data.user.user_nicename!=""?data.user.user_nicename:data.user.user_login);
+				$("#main-menu-user li.login").show();
+				
+			}
+			if(data.status==0){
+				$("#main-menu-user li.offline").show();
+			}
+			
+		});	
+		;(function($){
+			$.fn.totop=function(opt){
+				var scrolling=false;
+				return this.each(function(){
+					var $this=$(this);
+					$(window).scroll(function(){
+						if(!scrolling){
+							var sd=$(window).scrollTop();
+							if(sd>100){
+								$this.fadeIn();
+							}else{
+								$this.fadeOut();
+							}
+						}
+					});
+					
+					$this.click(function(){
+						scrolling=true;
+						$('html, body').animate({
+							scrollTop : 0
+						}, 500,function(){
+							scrolling=false;
+							$this.fadeOut();
+						});
+					});
+				});
+			};
+		})(jQuery); 
+		
+		$("#backtotop").totop();
+		
+		
+	});
+	</script>
+	 <script>    
+$('#main-menu-user li.dropdown,#main-menu-user .dropdown-menu').mouseover(function() {   
+     $(this).addClass('open');    }).mouseout(function() {        $(this).removeClass('open');    }); 
+</script> <?php echo hook('footer_end');?>
+   
 </body>
 
 </html>

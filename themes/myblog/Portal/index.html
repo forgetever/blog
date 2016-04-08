@@ -16,7 +16,7 @@
             <h3>新年寄语</h3>
             <p class="feature-cover-content">潜心磨剑，藏器于身。</p>
         </div>
-        <div class="feature-cover-bg" style="width: 100%; height: 100%; background-image: url(__TMPL__Public/img/feature-cover-leaf.jpg);">
+        <div class="feature-cover-bg" style="width: 100%; height: 100%; background-image: url(http://tu.ihuan.me/api/bing/go);">
         </div>
     </div>
     <!--pic show end-->
@@ -32,14 +32,46 @@
 								推荐阅读
 							</div>
 							<div class="col-md-6 col-xs-6">
-								<div class="input-group page-search-box clearfix">
-									<input type="text" class="form-control pull-right" placeholder="搜索站内">
-									<span class="input-group-btn">
-										<a class="btn btn-default search-button" href="javascript:;">搜索</a>
-									</span>
-								</div>
+                                <ul class="nav pull-right" id="main-menu-user">
+                                    <li class="dropdown user login">
+                                        <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" href="#">
+                                        <img src="__TMPL__/Public/img/headicon.png" class="headicon" width='26'/>
+                                        <span class="user-nicename"></span><b class="caret"></b></a>
+                                        <ul class="dropdown-menu
+">
+                                           <li><a href="{:U('user/center/index')}"><i class="fa fa-user"></i> &nbsp;个人中心</a></li>
+                                           <li class="divider"></li>
+                                           <li><a href="{:U('user/index/logout')}"><i class="fa fa-sign-out"></i> &nbsp;退出</a></li>
+                                        </ul>
+                                    </li>
+                                    <li class="dropdown user offline">
+                                        <a class="dropdown-toggle user" data-toggle="dropdown" href="#">
+                                            <img src="__TMPL__/Public/img/headicon.png" class="headicon" width='26'/>登录<b class="caret"></b>
+                                        </a>
+                                        <ul class="dropdown-menu pull-right">
+                                           <li><a href="{:U('api/oauth/login',array('type'=>'sina'))}"><i class="fa fa-weibo"></i> &nbsp;微博登录</a></li>
+                                           <li><a href="{:U('api/oauth/login',array('type'=>'qq'))}"><i class="fa fa-qq"></i> &nbsp;QQ登录</a></li>
+                                           <li><a href="{:leuu('user/login/index')}"><i class="fa fa-sign-in"></i> &nbsp;登录</a></li>
+                                           <li class="divider"></li>
+                                           <li><a href="{:leuu('user/register/index')}"><i class="fa fa-user"></i> &nbsp;注册</a></li>
+                                        </ul>
+                                    </li>
+                                </ul>
+								
 							</div>
 						</div>
+                        <div class="row">
+                            <div class="input-group page-search-box pull-right clearfix">
+                                     <form method="post" class="form-inline" action="{:U('portal/search/index')}">
+                                        <div class="form-group">    
+                                        <input type="text" class="form-control" placeholder="搜索站内" value="{:I('get.keyword')}" name="keyword"/>
+                                        </div>
+                                        <button type="submit" class="btn btn-default search-button" href="javascript:;"value="搜索">搜索</button>
+                                        
+                                    </form> 
+                                    
+                                </div>
+                        </div>
 					</h2>
             </div>
             <!--search bar end-->
@@ -84,7 +116,7 @@
         <!--更新文章-->
         <php>
 			$lastnews=sp_sql_posts("cid:$portal_index_lastnews;
-				field:post_title,post_date,post_keywords,post_excerpt,tid,term_id,smeta;
+				field:post_title,post_date,post_keywords,post_hits,post_like,post_excerpt,tid,term_id,smeta;
 				order:post_date desc;limit:6;"); 
 			
 		</php>
@@ -98,11 +130,14 @@
                 <div class="meta-box">
                     <span class="m-post-date">
 							<i class="fa fa-calendar-o"></i> {:date("Y年m月d",strtotime($vo['post_date']))}
-						</span>
+					</span>
                     <span class="comments-link">
-							<a href="#" class="ds-thread-count" target="_self">
-								<i class="fa fa-comments-o"></i> 留言</a>
-						</span>
+                          <a href="javascript:;"><i class="fa fa-eye"></i><span>{$vo.post_hits}</span></a>
+                            <a href="{:U('article/do_like',array('id'=>$object_id))}" class="js-count-btn"><i class="fa fa-thumbs-up"></i><span class="count">{$vo.post_like}</span></a>
+                            <a href="{:U('user/favorite/do_favorite',array('id'=>$object_id))}" class="js-favorite-btn" data-title="{$post_title}" data-url="{:leuu('article/index',array('id'=>$tid,'cid'=>$term_id))}" data-key="{:sp_get_favorite_key('posts',$object_id)}">
+                            <i class="fa fa-star-o"></i> </a> 
+							
+					</span>
                 </div>
                 <div class="post-content post-expect">
                     <p>{$vo.post_excerpt}
@@ -140,13 +175,13 @@
                 <div class="hr_25"></div>
                 <div class="row">
                     <div class="col-md-4">
-                        <a href="/blog/index.php?m=list&a=index&id=3" class="thumbnail"><img src="__TMPL__Public/img/works.png" alt="生活点滴"></a>
+                        <a href="{:leuu('list/index',array('id'=>3))}" class="thumbnail"><img src="__TMPL__Public/img/works.png" alt="生活点滴"></a>
                     </div>
                     <div class="col-md-4">
-                        <a href="/blog/index.php?m=list&a=index&id=4" class="thumbnail"><img src="__TMPL__Public/img/study.png" alt="学习点滴"></a>
+                        <a href="{:leuu('list/index',array('id'=>4))}" class="thumbnail"><img src="__TMPL__Public/img/study.png" alt="学习点滴"></a>
                     </div>
                     <div class="col-md-4">
-                        <a href="/blog/index.php?m=list&a=index&id=18" class="thumbnail"><img src="__TMPL__Public/img/books.png" alt="书籍推荐"></a>
+                        <a href="{:leuu('list/index',array('id'=>18))}" class="thumbnail"><img src="__TMPL__Public/img/books.png" alt="书籍推荐"></a>
                     </div>
                 </div>
             </div>
@@ -154,6 +189,7 @@
         <tc_include file="Public:footer" />
     </div>
     <tc_include file="Public:scripts" /> {:hook('footer_end')}
+   
 </body>
 
 </html>
